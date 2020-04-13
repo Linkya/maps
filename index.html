@@ -12,6 +12,10 @@
         <meta name="author" content="Linkya">
         <link rel="shortcut icon" href="assets/icon.png">
 
+        <!-- jQuery CDN -->
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <!-- Bootstrap Js CDN -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <!-- Bootstrap CSS CDN -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <!-- Our Custom CSS -->
@@ -112,7 +116,7 @@
                 </div>
 
                 <div style="width: 100%">
-                    <iframe style="width: 100%; height: 730px; border: none; box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); background: #fff;" src="https://developers.google.com/maps/documentation/utilities/polylineutility_5bbd4b6fcb5fada7a7a2df3ef50d3f67.frame?hl=pt-PT"></iframe>
+                    <iframe src="" style="width: 100%; height: 730px; border: none; box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); background: #fff;" ></iframe>
                 </div>
 
                 <p>Este utilitário usa a API JavaScript do Google Maps.</p>
@@ -120,21 +124,28 @@
             </div>
         </div>
 
-
-
-
-
-        <!-- jQuery CDN -->
-        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-        <!-- Bootstrap Js CDN -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
         <script type="text/javascript">
             $(document).ready(function () {
+
+                $.ajax({
+                    type: "get",
+                    method: "get",
+                    url: "https://app.linkya.xyz/cms/app/polyline",
+                    async: true,
+                    success: function (data) {
+                        var iframe = $('iframe');
+                        iframe.attr('src', data.data);
+                    },
+                    error: function (data) {
+                        console.log(data);
+                    }
+                });
+
                 $('#sidebarCollapse').on('click', function () {
                     $('#sidebar').toggleClass('active');
                     $(this).toggleClass('active');
                 });
+
             });
         </script>
     </body>
